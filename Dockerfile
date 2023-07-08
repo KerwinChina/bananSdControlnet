@@ -1,14 +1,14 @@
-FROM pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime
+FROM nvidia/cuda:11.7.1-runtime-ubuntu22.04
   
 # To use a different model, change the model URL below:
-ARG MODEL_URL='https://huggingface.co/stabilityai/stable-diffusion-2-1/blob/main/v2-1_768-ema-pruned.ckpt'
+ARG MODEL_URL='https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt'
 
 # If you are using a private Huggingface model (sign in required to download) insert your Huggingface
 # access token (https://huggingface.co/settings/tokens) below:
 ARG HF_TOKEN=''
 
 RUN apt update && apt-get -y install git wget \
-    python3.10 python3-venv python3-pip \
+    python3.10 python3.10-venv python3-pip \
     build-essential libgl-dev libglib2.0-0 vim
 RUN ln -s /usr/bin/python3.10 /usr/bin/python
 
@@ -34,6 +34,8 @@ RUN python prepare.py --skip-torch-cuda-test --xformers --reinstall-torch --rein
 
 ADD download.py download.py
 RUN python download.py --use-cpu=all
+
+RUN pip install dill
 
 RUN mkdir -p extensions/banana/scripts
 ADD script.py extensions/banana/scripts/banana.py
