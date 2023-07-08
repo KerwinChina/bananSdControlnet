@@ -8,7 +8,7 @@ ARG MODEL_URL='https://huggingface.co/stabilityai/stable-diffusion-2-1/blob/main
 ARG HF_TOKEN=''
 
 RUN apt update && apt-get -y install git wget \
-    python3.10 python3.10-venv python3-pip \
+    python3.10 python3-venv python3-pip \
     build-essential libgl-dev libglib2.0-0 vim
 RUN ln -s /usr/bin/python3.10 /usr/bin/python
 
