@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.7.1-runtime-ubuntu22.04
+FROM pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime
   
 # To use a different model, change the model URL below:
 ARG MODEL_URL='https://huggingface.co/stabilityai/stable-diffusion-2-1/blob/main/v2-1_768-ema-pruned.ckpt'
